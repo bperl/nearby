@@ -36,7 +36,7 @@ export default class MapContainer extends React.Component {
       <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: "AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE"
+          key: process.env.REACT_APP_GOOGLE_API_KEY
         }}
           center={this.state.center}
           defaultZoom={18}>
@@ -50,5 +50,3 @@ export default class MapContainer extends React.Component {
     );
   }
   }
-
-

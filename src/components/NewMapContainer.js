@@ -30,9 +30,9 @@ export class NewMapContainer extends Component {
   }
 
 	fetchNearby = () => {
-		let urlWithTypestr = `https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.state.lat},${this.state.lng}&radius=1000&type=${this.props.searchStr}&keyword=${this.props.typeStr}&key=AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE`
-		let urlWithoutTypestr = `https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.state.lat},${this.state.lng}&radius=1000&type=${this.props.searchStr}&key=AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE`
-
+		let urlWithTypestr = `https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.state.lat},${this.state.lng}&radius=1000&type=${this.props.searchStr}&keyword=${this.props.typeStr}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+		let urlWithoutTypestr = `https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.state.lat},${this.state.lng}&radius=1000&type=${this.props.searchStr}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+		debugger;
 		console.log('in map urlWithTypest', urlWithTypestr)
 		console.log('in map urlWithoutTypestr', urlWithoutTypestr)
 
@@ -52,7 +52,7 @@ export class NewMapContainer extends Component {
 	fetchPlacesInfo = () => {
 		// console.log("fethplaces", url)
 		this.state.markerPostions.forEach(x =>
-			fetch(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${x.place_id}&key=AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE`)
+			fetch(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${x.place_id}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
 				.then(resp => resp.json())
 				.then(data => this.placeData.push(data))
 			// .then(data => this.setState({placesInfo: ...placesInfo + data.result}))
@@ -83,6 +83,7 @@ export class NewMapContainer extends Component {
 
 
   render() {
+		console.log('KEY IS: ',  process.env.REACT_APP_GOOGLE_API_KEY);
     console.log('in map container', this.state)
 		// this.getLocation()
     return (
@@ -92,12 +93,12 @@ export class NewMapContainer extends Component {
 				<div>
 					<Sidedock placesData={this.placeData}/>
 				</div>
-				
+
 			</div>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE"
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY
 })(NewMapContainer)
