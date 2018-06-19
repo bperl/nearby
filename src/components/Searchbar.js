@@ -33,7 +33,7 @@ export default class Searchbar extends React.Component{
 			isSubmitted:true
 		})
 		// debugger
-		// fetch(`https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.state.currentLat},${this.state.currentLng}&radius=50&type=${this.state.searchStr}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+		// fetch(`https://maps.googleapis.com/maps/api/place/radarsearch/json?location=${this.state.currentLat},${this.state.currentLng}&radius=50&type=${this.state.searchStr}&key=AIzaSyAF3laRwdxS7LqBHaCP5UbQX-ZKOOTFPwE`)
 		// .then(resp => resp.json())
 	}
 
