@@ -10,11 +10,12 @@ export default class MapContainer extends React.Component {
 
   getLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.success);
+      navigator.geolocation.getCurrentPosition(this.success, this.failure);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   };
+
   success = pos => {
     console.log(pos.coords);
     this.setState(
@@ -23,6 +24,22 @@ export default class MapContainer extends React.Component {
       },
       () => console.log(this.state)
     );
+  };
+
+  failure = error => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        console.log("User denied permission.");
+        break;
+      case error.TIMEOUT:
+        console.log("Request timed out");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.log("Could not access position.");
+        break;
+      default:
+        console.log("Another error");
+    }
   };
 
   // static defaultProps = {
